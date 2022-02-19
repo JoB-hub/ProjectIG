@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/board.css') }}" />
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>Turn: {{ game.turn }}</div>
+    <div>{{ game.players[game.current_enemy] }}<br></div>
+    <div>{{ game.players[game.current_enemy].hand }}<br></div>
+    <div>{{ game.players[game.current_enemy].player_board }}<br></div>
+
+    <div>-----------------------------<br></div>
+
+    <div>{{ game.players[game.current_player].player_board }}<br></div>
+    <div>{{ game.players[game.current_player].hand }}<br></div>
+    <div>{{ game.players[game.current_player] }}<br></div>
+</body>
+</html>
