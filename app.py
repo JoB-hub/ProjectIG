@@ -23,9 +23,7 @@ def solo_start():
     game = Game()
     game.add_player(Player(request.form['Player 1'], 0, 0))
     game.add_player(Player(request.form['Player 2'], 1, 1))
-    for i in range(5):
-        game.players[0].add_to_hand()
-        game.players[1].add_to_hand()
+    game.deal_the_cards()
     game.start_turn()
     return redirect('/board')
 

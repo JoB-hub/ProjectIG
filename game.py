@@ -21,7 +21,8 @@ class Game:
 
     def deal_the_cards(self):
         for i in range(5):
-            self.p
+            self.players[0].add_to_hand()
+            self.players[1].add_to_hand()
 
     def choose_card(self, index):
         return self.players[self.current_player].hand.pop(index)
