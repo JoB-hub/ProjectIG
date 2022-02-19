@@ -7,14 +7,16 @@
 </head>
 <body>
     <div>Turn: {{ game.turn }}</div>
-    <div>{{ game.players[game.current_enemy] }}<br></div>
-    <div>{{ game.players[game.current_enemy].hand }}<br></div>
-    <div>{{ game.players[game.current_enemy].player_board }}<br></div>
-
+    <div class="enemy">
+        <div>{{ game.players[game.current_enemy] }}<br></div>
+        <div>{{ game.players[game.current_enemy].hand }}<br></div>
+        <div>{{ game.players[game.current_enemy].player_board }}<br></div>
+    </div>
     <div>-----------------------------<br></div>
-
-    <div>{{ game.players[game.current_player].player_board }}<br></div>
-    <div>{{ game.players[game.current_player].hand }}<br></div>
-    <div>{{ game.players[game.current_player] }}<br></div>
+    <div class="player">
+        <div>{{ game.players[game.current_player].player_board }}<br></div>
+        <div>{{ game.players[game.current_player].hand }}<br></div>
+        <div>{{ game.players[game.current_player] }}<br></div>
+    </div>
 </body>
 </html>

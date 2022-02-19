@@ -19,6 +19,10 @@ class Game:
         else:
             self.current_player = 0
 
+    def deal_the_cards(self):
+        for i in range(5):
+            self.p
+
     def choose_card(self, index):
         return self.players[self.current_player].hand.pop(index)
 
