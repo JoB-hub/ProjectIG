@@ -4,6 +4,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/board.css') }}" />
     <meta charset="UTF-8">
     <title>Turn {{ game.turn }}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
     <div>Turn: {{ game.turn }}</div>
@@ -15,25 +18,27 @@
     <div class="board">
         <form method="post">
             <div class="enemy_board">
-                {% for place in game.players[game.current_enemy].player_board %}
+                {% for card in game.players[game.current_enemy].player_board %}
                     <label>
                         <input type="radio" name="choice_attack" value="{{ loop.index0 }}" />
-                            {% if place == 0 %}
+                            {% if card == 0 %}
                                 <img class="empty_slot" src="/static/images/EmptySlot.jpg">
                             {% else %}
-                                <img src="/static/images/{{ place.name }}.jpg">
+{#                                <img src="/static/images/{{ card.name }}.jpg">#}
+                                {% include 'card.html' %}
                             {% endif %}
                     </label>
                 {% endfor %}
             </div>
             <div class="player_board">
-                {% for place in game.players[game.current_player].player_board %}
+                {% for card in game.players[game.current_player].player_board %}
                     <label>
                         <input type="radio" name="choice_board" value="{{ loop.index0 }}" />
-                            {% if place == 0 %}
+                            {% if card == 0 %}
                                 <img class="empty_slot" src="/static/images/EmptySlot.jpg">
                             {% else %}
-                                <img src="/static/images/{{ place.name }}.jpg">
+{#                                <img src="/static/images/{{ card.name }}.jpg">#}
+                                {% include 'card.html' %}
                             {% endif %}
                     </label>
                 {% endfor %}
@@ -42,14 +47,16 @@
                 {% for card in game.players[game.current_player].hand %}
                     <label>
                         <input type="radio" id="card" name="choice" value="{{ loop.index0 }}" />
-                        <img src="/static/images/{{ card.name }}.jpg">
+{#                        <img src="/static/images/{{ card.name }}.jpg">#}
+                        {% include 'card.html' %}
+
                     </label>
                 {% endfor %}
             </div>
             <div class="end_button">
                 <label>
                     <input type="submit" id="card" name="end_turn" value=1 />
-                    <img src="/static/images/Texture2_TradingCard.jpg">
+                    <img class="thatoneimage" src="/static/images/Endturn.jpg">
                 </label>
             </div>
         <div class="play_button">
@@ -57,7 +64,7 @@
 {#                    <input type="submit" id="card" name="end_turn" value=1 />#}
 {#                    <img src="/static/images/Texture1_TradingCard.jpg">#}
 {#                </label>#}
-                <input type="image" src="/static/images/Texture1_TradingCard.jpg" height="250px" alt="Play button" />
+                <input type="image" src="/static/images/Play.jpg" class="thatoneimage" height="80px" alt="Play button" />
             </div>
         </form>
     </div>

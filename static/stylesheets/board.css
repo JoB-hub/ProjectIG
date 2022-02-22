@@ -5,6 +5,8 @@ body {
   -o-background-size: cover;
   background-size: auto 100%;
   text-align: center;
+  padding: 2%;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .enemy {
@@ -12,9 +14,9 @@ body {
   left: 0;
   right: 0;
   margin: auto;
-  width: 70%;
+  width: 80%;
   background: antiquewhite 10%;
-  border: 3px solid black;
+  /*border: 3px solid black;*/
 }
 
 .player {
@@ -23,36 +25,29 @@ body {
   right: 0;
   /*bottom: 3%;*/
   margin: auto;
-  width: 70%;
+  width: 80%;
   background: antiquewhite 10%;
-  border: 3px solid black;
+  /*border: 3px solid black;*/
 }
 
-/*.board {*/
-/*  position: absolute;*/
-/*  left: 0;*/
-/*  right: 0;*/
-/*  top: 50%;*/
-/*  transform: translate(0, -50%);*/
-/*  margin: auto;*/
-/*  width: 70%;*/
-/*  background: darkcyan 60%;*/
-/*}*/
-
 .enemy_board {
+  display: flex;
   height: auto;
   width: 70%;
   margin: 0 auto;
   position: relative;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .player_board {
+  display: flex;
   height: auto;
   width: 70%;
   margin: 0 auto;
   position: relative;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .board {
@@ -61,17 +56,19 @@ body {
   right: 0;
   /*top: 10%;*/
   margin: auto;
-  width: 70%;
+  width: 80%;
   /*background: rgba(0, 106, 151, 0.5);*/
-  border: 3px solid black;
+  /*border: 3px solid black;*/
 }
 
 .hand {
+  display: flex;
   height: auto;
   width: auto;
   margin: 0 auto;
   position: relative;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .end_button {
@@ -131,4 +128,16 @@ img {
 
 .empty_slot {
   opacity: 60%;
+}
+
+.thatoneimage {
+  height: 85px;
+  border-radius: 15%;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 4px 8px rgb(255, 225, 151);
+}
+
+.thatoneimage:hover {
+  color: rgb(255, 209, 117);
+  box-shadow: 0 5px 10px rgb(255, 225, 151);
 }

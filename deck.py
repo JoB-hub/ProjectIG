@@ -33,11 +33,6 @@ card30 = Card('The Wolfman', 3, 3, 4)
 
 
 decks = []
-decks.append([card1, card2, card3, card6, card7, card9, card11, card12, card8, card29])
-decks.append([card1, card2, card4, card3, card5, card10, card12, card6, card7, card21])
-# decks.append([card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14,
-#               card15, card16, card17, card18, card19, card20, card21, card22, card23, card24, card25, card26, card27,
-#               card28, card29, card30])
-# decks.append([card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11, card12, card13, card14,
-#               card15, card16, card17, card18, card19, card20, card21, card22, card23, card24, card25, card26, card27,
-#               card28, card29, card30])
+decks.append([card1, card3, card5, card7, card9, card11, card13, card15, card17, card19, card21, card23, card25, card27, card29])
+decks.append([card2, card4, card6, card8, card10, card12, card14, card16, card18, card20, card22, card24, card26, card28, card30])
+

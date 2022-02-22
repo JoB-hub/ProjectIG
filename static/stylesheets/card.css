@@ -1,0 +1,53 @@
+.card-container {
+    position: relative;
+    width: fit-content;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.card-container:hover {
+  box-shadow: 5px 5px 5px 5px rgb(255, 223, 148);
+}
+
+.ap .hp .cost {
+    /*position: absolute;*/
+    /*top: -20%;*/
+}
+.ap {
+    /*left: 0;*/
+    background-color: rgba(255, 142, 162, 0.8);
+    margin-left: 4%;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 30px;
+    border-radius: 5px 20px 5px;
+    box-shadow: 3px 3px 2px rgba(255, 176, 191, 0.8);
+
+}
+ .hp {
+     /*right: 0;*/
+     background-color: rgba(250, 236, 178, 0.8);
+     margin-right: 4%;
+     font-family: 'Ubuntu', sans-serif;
+     font-size: 30px;
+     border-radius: 5px 20px 5px;
+     box-shadow: 3px 3px 2px rgba(255, 223, 180, 0.8);
+
+ }
+ .cost {
+     /*left: 50%;*/
+     /*transform: translate(-50%);*/
+     background-color: rgba(100, 129, 165, 0.8);
+     font-family: 'Ubuntu', sans-serif;
+     font-size: 30px;
+     border-radius: 5px 20px 5px;
+     box-shadow: 3px 3px 2px rgba(79, 104, 128, 0.8);
+
+ }
+ .stats {
+     position: absolute;
+     top:7%;
+     left: 0;
+     right: 0;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }

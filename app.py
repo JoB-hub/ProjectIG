@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from player import Player
 from game import Game
-
+from card import Card
 app = Flask(__name__)
 
 game = Game()
@@ -55,7 +55,7 @@ def board():
                 return redirect('/winner')
             game.end_turn()
             game.start_turn()
-        elif "choice_board" in request.form  and "end_turn" not in request.form:
+        elif "choice_board" in request.form and "end_turn" not in request.form:
             card_index = int(request.form["choice_board"])
             game.attack(card_index)
 
