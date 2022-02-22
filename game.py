@@ -28,29 +28,33 @@ class Game:
         return self.players[self.current_player].hand.pop(index)
 
     def add_to_board(self, placement, card_index):
-        if 6 > placement > 0 and self.players[self.current_player].player_board[placement - 1] == 0 and \
-                self.players[self.current_player].hand[card_index-1].cost <= self.players[self.current_player].temp_mp:
-            self.players[self.current_player].temp_mp -= self.players[self.current_player].hand[card_index-1].cost
-            self.players[self.current_player].player_board[placement-1] = self.choose_card(card_index-1)
+        if 5 > placement >= 0 and self.players[self.current_player].player_board[placement] == 0 and \
+                self.players[self.current_player].hand[card_index].cost <= self.players[self.current_player].temp_mp:
+            self.players[self.current_player].temp_mp -= self.players[self.current_player].hand[card_index].cost
+            self.players[self.current_player].player_board[placement] = self.choose_card(card_index)
         else:
             print("No mana")
 
     def attack(self, index_attack):
-        if self.players[self.current_player].player_board[index_attack-1] != 0:
-            if self.players[self.current_enemy].player_board[index_attack-1] == 0:
-                self.players[self.current_enemy].hp -= self.players[self.current_player].player_board[index_attack-1].ap
+        if self.players[self.current_player].player_board[index_attack] != 0 and \
+                self.players[self.current_player].player_board[index_attack].already_attacked is False:
+            if self.players[self.current_enemy].player_board[index_attack] == 0:
+                self.players[self.current_enemy].hp -= self.players[self.current_player].player_board[index_attack].ap
+                self.players[self.current_player].player_board[index_attack].already_attacked = True
             else:
-                self.players[self.current_enemy].player_board[index_attack-1].hp -= \
-                    self.players[self.current_player].player_board[index_attack-1].ap
-                if self.players[self.current_enemy].player_board[index_attack-1].hp <= 0:
-                    self.players[self.current_enemy].player_board[index_attack-1] = 0
+                self.players[self.current_enemy].player_board[index_attack].hp -= \
+                    self.players[self.current_player].player_board[index_attack].ap
+                self.players[self.current_player].player_board[index_attack].already_attacked = True
+                if self.players[self.current_enemy].player_board[index_attack].hp <= 0:
+                    self.players[self.current_enemy].player_board[index_attack] = 0
 
     def start_turn(self):
         if not self.current_turn:
             if self.players[self.current_player].hp <= 0:
-                self.delete_player(self.current_player)
-                self.next_player()
-                self.current_turn = False
+                print('GAME OVER')
+                # self.delete_player(self.current_player)
+                # self.next_player()
+                # self.current_turn = False
             else:
                 self.players[self.current_player].add_to_hand()
 
@@ -77,9 +81,13 @@ class Game:
         if self.current_turn:
             self.current_turn = False
             if self.players[self.current_enemy].hp <= 0:
-                self.delete_player(self.current_enemy)
-            if len(self.players) == 1:
-                print('GAME OVER')
+                print("Winner: " + self.players[self.current_player].name)
+            #     self.delete_player(self.current_enemy)
+            # if len(self.players) == 1:
+            #     print('GAME OVER')
+            for card in range(len(self.players[self.current_player].player_board)):
+                if self.players[self.current_player].player_board[card] != 0:
+                    self.players[self.current_player].player_board[card].already_attacked = False
             self.next_player()
 
     def __repr__(self):

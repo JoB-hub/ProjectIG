@@ -3,20 +3,65 @@
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/board.css') }}" />
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Turn {{ game.turn }}</title>
 </head>
 <body>
     <div>Turn: {{ game.turn }}</div>
     <div class="enemy">
-        <div>{{ game.players[game.current_enemy] }}<br></div>
-        <div>{{ game.players[game.current_enemy].hand }}<br></div>
-        <div>{{ game.players[game.current_enemy].player_board }}<br></div>
+        <div> Turn: {{ game.turn }}</div>
+        <div>{{ game.players[game.current_enemy] }} HP: {{ game.players[game.current_enemy].hp }} MP: {{ game.players[game.current_enemy].temp_mp }}<br></div>
     </div>
-    <div>-----------------------------<br></div>
-    <div class="player">
-        <div>{{ game.players[game.current_player].player_board }}<br></div>
-        <div>{{ game.players[game.current_player].hand }}<br></div>
-        <div>{{ game.players[game.current_player] }}<br></div>
+
+    <div class="board">
+        <form method="post">
+            <div class="enemy_board">
+                {% for place in game.players[game.current_enemy].player_board %}
+                    <label>
+                        <input type="radio" name="choice_attack" value="{{ loop.index0 }}" />
+                            {% if place == 0 %}
+                                <img class="empty_slot" src="/static/images/EmptySlot.jpg">
+                            {% else %}
+                                <img src="/static/images/{{ place.name }}.jpg">
+                            {% endif %}
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="player_board">
+                {% for place in game.players[game.current_player].player_board %}
+                    <label>
+                        <input type="radio" name="choice_board" value="{{ loop.index0 }}" />
+                            {% if place == 0 %}
+                                <img class="empty_slot" src="/static/images/EmptySlot.jpg">
+                            {% else %}
+                                <img src="/static/images/{{ place.name }}.jpg">
+                            {% endif %}
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="hand">
+                {% for card in game.players[game.current_player].hand %}
+                    <label>
+                        <input type="radio" id="card" name="choice" value="{{ loop.index0 }}" />
+                        <img src="/static/images/{{ card.name }}.jpg">
+                    </label>
+                {% endfor %}
+            </div>
+            <div class="end_button">
+                <label>
+                    <input type="submit" id="card" name="end_turn" value=1 />
+                    <img src="/static/images/Texture2_TradingCard.jpg">
+                </label>
+            </div>
+        <div class="play_button">
+{#                <label>#}
+{#                    <input type="submit" id="card" name="end_turn" value=1 />#}
+{#                    <img src="/static/images/Texture1_TradingCard.jpg">#}
+{#                </label>#}
+                <input type="image" src="/static/images/Texture1_TradingCard.jpg" height="250px" alt="Play button" />
+            </div>
+        </form>
     </div>
+    <div class="player">{{ game.players[game.current_player] }} HP: {{ game.players[game.current_player].hp }} MP: {{ game.players[game.current_player].temp_mp }}<br></div>
+
 </body>
 </html>

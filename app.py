@@ -23,172 +23,44 @@ def solo_start():
     game = Game()
     game.add_player(Player(request.form['Player 1'], 0, 0))
     game.add_player(Player(request.form['Player 2'], 1, 1))
+    print(game.current_player)
+    print(game.current_enemy)
     game.deal_the_cards()
+    print(game.players[game.current_player].hand)
+    print(game.players[game.current_enemy].hand)
     game.start_turn()
     return redirect('/board')
 
 
-@app.route('/board')
+@app.route('/winner')
+def winner():
+    return render_template('winner.html')
+
+
+@app.route('/board', methods=['POST', 'GET'])
 def board():
+
     global game
+    print(game.current_player)
+    print(game.current_enemy)
+    print(game.players[game.current_player].hand)
+    print(game.players[game.current_enemy].hand)
+    if len(game.players) > 1:
+        if "choice" in request.form and "choice_board" in request.form and "end_turn" not in request.form:
+            card_index = int(request.form["choice"])
+            board_index = int(request.form["choice_board"])
+            game.add_to_board(board_index, card_index)
+        elif "end_turn" in request.form:
+            if game.players[game.current_enemy].hp <=0:
+                return redirect('/winner')
+            game.end_turn()
+            game.start_turn()
+        elif "choice_board" in request.form  and "end_turn" not in request.form:
+            card_index = int(request.form["choice_board"])
+            game.attack(card_index)
+
     return render_template('board.html', game=game)
 
-# gra = Game()
-#
-# gracz = Player("Sam", 0, 0)
-# gracz2 = Player("Bam", 1, 1)
-#
-# gra.add_player(gracz)
-# gra.add_player(gracz2)
-#
-# gra.players[0].add_to_hand()
-# gra.players[0].add_to_hand()
-# gra.players[0].add_to_hand()
-# gra.players[0].add_to_hand()
-# gra.players[0].add_to_hand()
-#
-# gra.players[1].add_to_hand()
-# gra.players[1].add_to_hand()
-# gra.players[1].add_to_hand()
-# gra.players[1].add_to_hand()
-# gra.players[1].add_to_hand()
-#
-#
-# gra.start_turn()
-# gra.add_to_board(5, 6)
-# print(gra.__repr__())
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print(gra.players[gra.current_player].player_board)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# gra.add_to_board(1, 5)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
-#
-# gra.start_turn()
-# print("Tura: " + str(gra.turn) + "      Gracz nr: " + str(gra.current_player) + "     HP: " + str(gra.players[gra.current_player].hp) + "     Stałe punkty many: " + str(gra.players[gra.current_player].mp) + "     Temp punkty many: " + str(gra.players[gra.current_player].temp_mp))
-# print(gra.players[gra.current_player].hand)
-# print("Plansza gracza: " + str(gra.players[gra.current_player].player_board))
-# print("Plansza przeciwnika: " + str(gra.players[gra.current_enemy].player_board))
-# gra.attack(1)
-# gra.end_turn()
-#
-# print("-----------------------")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)

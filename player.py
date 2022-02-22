@@ -18,7 +18,7 @@ class Player:
         if len(self.deck) == 0:
             self.hp -= 1
         else:
-            if len(self.hand) < 10:
+            if len(self.hand) < 9:
                 self.hand.append(self.deck.pop())
             else:
                 self.deck.pop()
