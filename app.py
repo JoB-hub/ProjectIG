@@ -4,7 +4,7 @@ from game import Game
 from card import Card
 app = Flask(__name__)
 
-game = Game()
+# game = Game()
 
 
 @app.route('/')
@@ -52,6 +52,9 @@ def board():
             game.add_to_board(board_index, card_index)
         elif "end_turn" in request.form:
             if game.players[game.current_enemy].hp <=0:
+                for i in range(5):
+                    game.players[0].player_board[i] = 0
+                    game.players[1].player_board[i] = 0
                 return redirect('/winner')
             game.end_turn()
             game.start_turn()

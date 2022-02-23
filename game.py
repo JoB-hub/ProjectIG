@@ -55,6 +55,9 @@ class Game:
                 # self.delete_player(self.current_player)
                 # self.next_player()
                 # self.current_turn = False
+            elif self.players[self.current_enemy].hp <=0:
+                self.players[self.current_player].player_board.clear()
+                self.players[self.current_enemy].player_board.clear()
             else:
                 self.players[self.current_player].add_to_hand()
 
@@ -82,6 +85,8 @@ class Game:
             self.current_turn = False
             if self.players[self.current_enemy].hp <= 0:
                 print("Winner: " + self.players[self.current_player].name)
+                self.players[self.current_player].player_board.clear()
+                self.players[self.current_enemy].player_board.clear()
             #     self.delete_player(self.current_enemy)
             # if len(self.players) == 1:
             #     print('GAME OVER')

@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/winner.css') }}" />
     <meta charset="UTF-8">
-    <title>Gameover</title>
+    <title>Winner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
-YOU WON EHE
-<a href='/'>NEW GAME</a>
+    <div class="login-box">
+        <h2>You are the winner!</h2>
+        <a href="{{ url_for('solo') }}">PLAY AGAIN?</a>
+    </div>
 </body>
 </html>

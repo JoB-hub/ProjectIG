@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/solo.css') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
 </head>
 <body>
-<form action="{{ url_for('solo_start') }}" method="post">
-    <div id="g1">Player 1: <input name="Player 1" value="Sam"></div>
-    <div id="g1">Player 2: <input name="Player 2" value="Bam"></div>
-    <input type="submit" value="Start the game">
-</form>
+<div class="login-box">
+    <h2>Players</h2>
+    <form action="{{ url_for('solo_start') }}" method="post">
+        <div class="player" id="g1">
+            <input name="Player 1" value="Sam">
+            <label>Player 1</label>
+        </div>
+        <div class="player" id="g1">
+            <input name="Player 2" value="Bam">
+            <label>Player 2</label>
+        </div>
+        <input type="submit" value="Start the game">
+    </form>
+</div>
 </body>
 </html>
